@@ -34,7 +34,7 @@ private:
 	bool customCarrier;
 	
 public:
-	inputSanitizer();
+	inputSanitizer(errorHandler * sanitizerErrorHandler);
 	~inputSanitizer();
 	
 	int checkArgument(const std::string argument, const std::string variable);
@@ -47,15 +47,15 @@ public:
 	std::string checkTo(std::string to);
 };
 
-inputSanitizer::inputSanitizer() {
-	// Creates an instance of errorHandler that can be called from member functions.
+inputSanitizer::inputSanitizer(errorHandler * sanitizerErrorHandler) {
+	/* Creates an instance of errorHandler that can be called from member functions.
 	// Fixed with the help of blankthemuffin from ##compsci on irc.freenode.net
-	errorHandler *sanitizerErrorHandler = new errorHandler;
+	errorHandler *sanitizerErrorHandler = new errorHandler; */
 	ptrErrorHandler = sanitizerErrorHandler;
 }
 inputSanitizer::~inputSanitizer() {
 	// Frees the space created by errorHandler
-	delete ptrErrorHandler;
+	// delete ptrErrorHandler;
 }
 
 int inputSanitizer::checkArgument(const std::string argument, const std::string variable) {

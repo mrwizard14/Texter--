@@ -26,7 +26,7 @@
 
 class helpHandler{
 public:
-	static helpHandler &getInstance();
+	// static helpHandler &getInstance();
 	
 	void displayHelp();
 	
@@ -34,11 +34,12 @@ public:
 	bool displayTermsOfService();
 	
 private:
+	/*
 	static helpHandler _instance;
 	helpHandler() {}
 	~helpHandler() {} 
 	helpHandler(const helpHandler &);
-	helpHandler() & operator = (const helpHandler &);
+	helpHandler() & operator=(const helpHandler &); // */
 };
 
 void helpHandler::displayHelp() {

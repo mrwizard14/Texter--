@@ -56,12 +56,15 @@ int main (int argc, char * const argv[]) {
 	//                           //
 	///////////////////////////////
 	
-	// Declaring all the objects
-	controller mainController;
+	// Objects referenced by other objects go first
+	
 	errorHandler mainErrorHandler;
-	helpHandler helpHandler::_instance;
-	inputSanitizer mainInputSanitizer;
-	mailHandler mainMailHandler;
+	
+	// Declaring all the other objects
+	controller mainController;
+	helpHandler mainHelpHandler;
+	inputSanitizer mainInputSanitizer(&mainErrorHandler);
+	mailHandler mainMailHandler(&mainController, &mainErrorHandler, &mainInputSanitizer);
 	settingsHandler mainSettingsHandler;
 	
 	///////////////////////////////

@@ -54,7 +54,7 @@ private:
 	
 	// Sending
 public:
-	mailHandler();
+	mailHandler(converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer);
 	~mailHandler();
 	
 	// Accessing private variables
@@ -82,19 +82,12 @@ public:
 	bool printSendConfirmation();
 };
 
-mailHandler::mailHandler() {
+mailHandler::mailHandler(converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer) {
 	this->resetVariables();
 	this->smtp = "undefined";
 	
-	// Creates an instance of errorHandler that can be called from member functions.
-	// Fixed with the help of blankthemuffin from ##compsci on irc.freenode.net
-	errorHandler *mailerErrorHandler = new errorHandler;
 	ptrErrorHandler = mailerErrorHandler;
-	
-	converter *mailerConverter;
 	ptrConverter = mailerConverter;
-	
-	inputSanitizer *mailerInputSanitizer;
 	ptrInputSanitizer = mailerInputSanitizer;
 }
 mailHandler::~mailHandler() {
