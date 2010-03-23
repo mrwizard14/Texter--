@@ -42,6 +42,7 @@ public:
 	std::string noSMTP();
 	std::string noTo();
 	
+	void OSNotFound();
 };
 
 // General issues with input
@@ -127,6 +128,11 @@ std::string errorHandler::noTo() {
 	std::string to;
 	std::cin >> to;
 	return to;
+}
+
+void errorHandler::OSNotFound() {
+	std::cout << "FATAL ERROR: Without file handling options, Texter++ cannot continue." << std::endl;
+	exit(7);
 }
 
 #endif // ERROR_HANDLER_H_INCLUDED
