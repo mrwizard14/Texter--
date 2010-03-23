@@ -44,6 +44,7 @@
  4 - OS failure
  5 - Improper function calls
  6 - License / Terms of Service not agreed to
+ 7 - OS Detection
  */ // Error Codes
 
 using namespace std;
@@ -56,16 +57,15 @@ int main (int argc, char * const argv[]) {
 	//                           //
 	///////////////////////////////
 	
-	// Objects referenced by other objects go first
-	
-	errorHandler mainErrorHandler;
-	
 	// Declaring all the other objects
 	controller mainController;
+	errorHandler mainErrorHandler;
 	helpHandler mainHelpHandler;
 	inputSanitizer mainInputSanitizer(&mainErrorHandler);
-	mailHandler mainMailHandler(&mainController, &mainErrorHandler, &mainInputSanitizer);
+	mailHandler mainMailHandler;
 	settingsHandler mainSettingsHandler;
+	
+	// Giving the objects the pointers to the objects they want.
 	
 	///////////////////////////////
 	//                           //
