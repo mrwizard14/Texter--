@@ -54,7 +54,7 @@ private:
 	
 	// Sending
 public:
-	mailHandler(converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer);
+	mailHandler();
 	~mailHandler();
 	
 	// Accessing private variables
@@ -82,13 +82,15 @@ public:
 	bool printSendConfirmation();
 };
 
-mailHandler::mailHandler(converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer) {
+mailHandler::mailHandler(/* converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer */) {
 	this->resetVariables();
 	this->smtp = "undefined";
 	
+	/* 
 	ptrErrorHandler = mailerErrorHandler;
 	ptrConverter = mailerConverter;
 	ptrInputSanitizer = mailerInputSanitizer;
+	*/
 }
 mailHandler::~mailHandler() {
 	delete ptrConverter;
