@@ -25,6 +25,8 @@
  */
 
 #include <cstdlib> // std::toupper()
+#include <fstream>
+#include <string>
 
 class settingsHandler {
 private:
@@ -38,6 +40,8 @@ private:
 	void isMacOsX();
 	void isMacClassic();
 	void isWindows();
+	
+	std::string readLine(std::ifstream &file);
 	
 	bool needToRewrite;
 	
@@ -179,6 +183,13 @@ void settingsHandler::isWindows() {
 	this->path = "";
 }
 
+std::string settingsHandler::readLine(std::ifstream &settingsfile) {
+	char buffer[1024];
+	settingsfile.getline(&(buffer[0]), 1024, ';');
+	
+	return std::string(buffer);
+}
+
 bool settingsHandler::fileExists() {
 	return 1;
 }
@@ -187,7 +198,20 @@ void settingsHandler::createFile() {
 	this->needToRewrite = 1;
 }
 void settingsHandler::readFile() {
-	std::cout << "Hi." << std::endl;
+	std::string path = this->path;
+	std::ifstream settingsfile("/texter.txt");
+	bool done;
+	
+	while (!done) {
+		std::string line = this->readLine(settingsfile);
+		if (settingsfile.eof() == true) {
+			done = true;
+			break;
+		}
+		
+	}
+	
+	settingsfile.close();
 }
 
 std::string settingsHandler::getSMTP() {
