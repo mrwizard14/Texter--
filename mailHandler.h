@@ -28,7 +28,6 @@
 #include <stdlib.h> // atoi, itoa
 #include <iostream>
 
-#include "converter.h"
 #include "errorHandler.h"
 #include "inputSanitizer.h"
 
@@ -55,7 +54,10 @@ private:
 	// Sending
 public:
 	mailHandler();
-	~mailHandler();
+	
+	void getConverter(converter * mailConverter);
+	void getErrorHandler(errorHandler * mailErrorHandler);
+	void getInputSanitizer(inputSanitizer * mailInputSanitizer);
 	
 	// Accessing private variables
 	std::string getCarrier();
@@ -82,20 +84,9 @@ public:
 	bool printSendConfirmation();
 };
 
-mailHandler::mailHandler(/* converter * mailerConverter, errorHandler * mailerErrorHandler, inputSanitizer * mailerInputSanitizer */) {
+mailHandler::mailHandler() {
 	this->resetVariables();
 	this->smtp = "undefined";
-	
-	/* 
-	ptrErrorHandler = mailerErrorHandler;
-	ptrConverter = mailerConverter;
-	ptrInputSanitizer = mailerInputSanitizer;
-	*/
-}
-mailHandler::~mailHandler() {
-	delete ptrConverter;
-	delete ptrErrorHandler;
-	delete ptrInputSanitizer;
 }
 void mailHandler::resetVariables() {
 	this->areaCode = "undefined";
@@ -105,6 +96,16 @@ void mailHandler::resetVariables() {
 	this->message = "undefined";
 	this->sendNumber = 1;
 	this->to = "undefined";
+}
+
+void mailHandler::getConverter(converter * mailConverter) {
+	ptrConverter = mailConverter;
+}
+void mailHandler::getErrorHandler(errorHandler * mailErrorHandler) {
+	ptrErrorHandler = mailErrorHandler;
+}
+void mailHandler::getInputSanitizer(inputSanitizer * mailInputSanitizer) {
+	ptrInputSanitizer = mailInputSanitizer;
 }
 
 // Accessing private variables
