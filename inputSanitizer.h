@@ -25,7 +25,6 @@
  */
 
 #include <cstdlib> // std::toupper()
-
 #include "errorHandler.h"
 
 class inputSanitizer {
@@ -34,8 +33,8 @@ private:
 	bool customCarrier;
 	
 public:
-	inputSanitizer(errorHandler * sanitizerErrorHandler);
-	~inputSanitizer();
+	inputSanitizer(errorHandler * inputErrorHandler);
+	void getErrorHandler(errorHandler * inputErrorHandler);
 	
 	int checkArgument(const std::string argument, const std::string variable);
 	
@@ -47,15 +46,11 @@ public:
 	std::string checkTo(std::string to);
 };
 
-inputSanitizer::inputSanitizer(errorHandler * sanitizerErrorHandler) {
-	/* Creates an instance of errorHandler that can be called from member functions.
-	// Fixed with the help of blankthemuffin from ##compsci on irc.freenode.net
-	errorHandler *sanitizerErrorHandler = new errorHandler; */
-	ptrErrorHandler = sanitizerErrorHandler;
+inputSanitizer::inputSanitizer(errorHandler * inputErrorHandler) {
+	ptrErrorHandler = inputErrorHandler;
 }
-inputSanitizer::~inputSanitizer() {
-	// Frees the space created by errorHandler
-	// delete ptrErrorHandler;
+void inputSanitizer::getErrorHandler(errorHandler * inputErrorHandler) {
+	ptrErrorHandler = inputErrorHandler;
 }
 
 int inputSanitizer::checkArgument(const std::string argument, const std::string variable) {
