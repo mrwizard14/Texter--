@@ -59,6 +59,7 @@ int main (int argc, char * const argv[]) {
 	
 	// Declaring all the other objects
 	controller mainController;
+	converter mainConverter;
 	errorHandler mainErrorHandler;
 	helpHandler mainHelpHandler;
 	inputSanitizer mainInputSanitizer(&mainErrorHandler);
@@ -66,6 +67,11 @@ int main (int argc, char * const argv[]) {
 	settingsHandler mainSettingsHandler;
 	
 	// Giving the objects the pointers to the objects they want.
+	mainInputSanitizer.getErrorHandler(&mainErrorHandler);
+	mainMailHandler.getConverter(&mainConverter);
+	mainMailHandler.getErrorHandler(&mainErrorHandler);
+	mainMailHandler.getInputSanitizer(&mainInputSanitizer);
+	mainSettingsHandler.getErrorHandler(&mainErrorHandler);
 	
 	///////////////////////////////
 	//                           //
@@ -237,6 +243,20 @@ int main (int argc, char * const argv[]) {
 	mainMailHandler.checkPrerequisites();
 	mainMailHandler.printSendConfirmation();
 	// mainMailHandler.send();
+	
+	///////////////////////////////
+	//                           //
+	//          Cleanup          //
+	//                           //
+	///////////////////////////////
+	
+	delete &mainController;
+	delete &mainConverter;
+	delete &mainErrorHandler;
+	delete &mainHelpHandler;
+	delete &mainInputSanitizer;
+	delete &mainMailHandler;
+	delete &mainSettingsHandler;
 	
     return 0;
 } // Main
